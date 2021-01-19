@@ -16,14 +16,20 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
   "base64"
 );
 
-function getCss(theme: string, fontSize: string) {
-  let background = "white";
-  let foreground = "black";
+function getCss(
+  theme: string,
+  fontSize: string,
+  images: string[],
+  widths: string[],
+  heights: string[]
+) {
+  let background = "#eee";
+  let foreground = "#111";
   // let radial = "lightgray";
 
   if (theme === "dark") {
-    background = "black";
-    foreground = "white";
+    background = "#111";
+    foreground = "#eee";
     // radial = "dimgray";
   }
   return `
@@ -51,9 +57,10 @@ function getCss(theme: string, fontSize: string) {
     .body-left {
         background: ${background};
         background-size: 100px 100px;
+        background-image: ${getImage(images[0], widths[0], heights[0])};
         height: 100vh;
         display: flex;
-        text-align: center;
+        text-align: left;
         align-items: center;
         justify-content: flex-start;
     }
@@ -92,7 +99,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo {
-        margin: 0 75px;
+        margin: 0 75px 75px 0;
     }
 
     .plus {
@@ -112,12 +119,20 @@ function getCss(theme: string, fontSize: string) {
         vertical-align: -0.1em;
     }
     
-    .heading {
+    .heading-main {
+        font-family: 'Inter', sans-serif;
+        font-size: 64px;
+        margin-bottom: -48px;
+        font-weight: 300;
+        color: ${foreground};
+        line-height: 1;
+    }
+    .heading-subtitle {
         font-family: 'Inter', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};
-        line-height: 1.8;
+        line-height: 1;
     }`;
 }
 
@@ -139,7 +154,7 @@ export function getHtml(parsedReq: ParsedRequest) {
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        ${getCss(theme, fontSize)}
+        ${getCss(theme, fontSize, images, widths, heights)}
     </style>
     <body class="${centered ? "body-class" : "body-left"}">
         <div>
@@ -152,7 +167,9 @@ export function getHtml(parsedReq: ParsedRequest) {
                   )
                   .join("")}
             </div>
-            <div class="heading">${emojify(
+            <div class="heading-main">All Time High
+            </div>
+            <div class="heading-subtitle">${emojify(
               md ? marked(text) : sanitizeHtml(text)
             )}
             </div>
