@@ -146,6 +146,7 @@ export function getHtml(parsedReq: ParsedRequest) {
     widths,
     heights,
     cornerLogo,
+    hideHeader,
     centered,
   } = parsedReq;
   return `<!DOCTYPE html>
@@ -167,8 +168,9 @@ export function getHtml(parsedReq: ParsedRequest) {
                   )
                   .join("")}
             </div>
-            <div class="heading-main">All-Time High
-            </div>
+            ${
+              !hideHeader ? '<div class="heading-main">All-Time High</div>' : ""
+            }
             <div class="heading-subtitle">${emojify(
               md ? marked(text) : sanitizeHtml(text)
             )}

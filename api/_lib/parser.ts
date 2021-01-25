@@ -13,6 +13,7 @@ export function parseRequest(req: IncomingMessage) {
     theme,
     md,
     cornerLogo,
+    hideHeader,
     centered,
     // textLineTwo,
   } = query || {};
@@ -48,6 +49,7 @@ export function parseRequest(req: IncomingMessage) {
     heights: getArray(heights),
     centered: centered === "1" || centered === "true",
     cornerLogo: cornerLogo === "1" || cornerLogo === "true",
+    hideHeader: hideHeader === "1" || hideHeader === "true",
   };
   parsedRequest.images = getDefaultImages(
     parsedRequest.images,
