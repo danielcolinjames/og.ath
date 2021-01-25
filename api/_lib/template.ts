@@ -124,7 +124,7 @@ function getCss(
         font-size: 64px;
         margin-bottom: -48px;
         font-weight: 300;
-        color: ${foreground};
+        color: #888888;
         line-height: 1;
     }
     .heading-subtitle {
@@ -167,7 +167,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                   )
                   .join("")}
             </div>
-            <div class="heading-main">All Time High
+            <div class="heading-main">All-Time High
             </div>
             <div class="heading-subtitle">${emojify(
               md ? marked(text) : sanitizeHtml(text)
@@ -176,7 +176,7 @@ export function getHtml(parsedReq: ParsedRequest) {
             <div style="display:flex;align-items:center;justify-content:flex-start;">
               ${
                 cornerLogo
-                  ? '<img src="https://ath.ooo/athlogowhite.png" style="height:50px;width:auto;" /><p style="padding-left:20px;color:white;font-size:44px;" class="heading">ATH.ooo</p>'
+                  ? '<img src="https://ath.ooo/logo/wordmark_transparent_tight.png" style="height:100px;width:auto;" />'
                   : ""
               }
             </div>
