@@ -178,7 +178,7 @@ export function getHtml(parsedReq: ParsedRequest) {
             <div style="display:flex;align-items:center;justify-content:flex-start;">
               ${
                 cornerLogo
-                  ? '<img src="https://ath.ooo/logo/wordmark_transparent_tight.png" style="height:50px;margin-top:50px;width:auto;" />'
+                  ? '<img src="https://ath.ooo/logo/wordmark_transparent_tight_new.png" style="height:50px;margin-top:50px;width:auto;" />'
                   : ""
               }
             </div>
