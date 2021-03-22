@@ -136,7 +136,7 @@ function getCss(
         font-style: normal;
         color: #333;
         // line-height: 1;
-        margin-top: 14px;
+        margin-top: -14px;
         margin-bottom: -64px;
         margin-left: -10px;
     }
@@ -145,7 +145,7 @@ function getCss(
         // font-size: ${sanitizeHtml(fontSize)};
         font-size: 72px;
         font-style: normal;
-        color: #555;
+        color: ${foreground ? "#555" : "#555"};
         line-height: 1;
     }`;
 }
@@ -211,8 +211,8 @@ function getImage(src: string, width = "auto", height = "350") {
         class="logo"
         alt="Generated Image"
         src="${sanitizeHtml(src)}"
-        width=${width ? "350" : "350"}
-        height=${height ? "350" : "350"}
+        width=${width ? "300" : "300"}
+        height=${height ? "300" : "300"}
     />`;
 }
 

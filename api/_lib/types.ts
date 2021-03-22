@@ -8,11 +8,11 @@ export interface ParsedRequest {
   theme: Theme;
   md: boolean;
   fontSize: string;
+  symbol: string;
   images: string[];
   widths: string[];
   heights: string[];
   cornerLogo: boolean;
-  symbol: string;
   hideHeader: boolean;
   centered: boolean;
 }

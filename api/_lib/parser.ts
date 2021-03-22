@@ -25,6 +25,9 @@ export function parseRequest(req: IncomingMessage) {
   if (Array.isArray(theme)) {
     throw new Error("Expected a single theme");
   }
+  if (Array.isArray(symbol)) {
+    throw new Error("Expected a single symbol");
+  }
 
   const arr = (pathname || "/").slice(1).split(".");
   let extension = "";
@@ -45,12 +48,12 @@ export function parseRequest(req: IncomingMessage) {
     theme: theme === "dark" ? "dark" : "light",
     md: md === "1" || md === "true",
     fontSize: fontSize || "96px",
+    symbol: symbol || "",
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
     centered: centered === "1" || centered === "true",
     cornerLogo: cornerLogo === "1" || cornerLogo === "true",
-    symbol: symbol || "",
     hideHeader: hideHeader === "1" || hideHeader === "true",
   };
   parsedRequest.images = getDefaultImages(
