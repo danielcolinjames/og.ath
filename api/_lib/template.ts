@@ -28,8 +28,8 @@ function getCss(
   // let radial = "lightgray";
 
   if (theme === "dark") {
-    background = "#111";
-    foreground = "#eee";
+    background = "#fefefe";
+    foreground = "#111";
     // radial = "dimgray";
   }
   return `
@@ -60,6 +60,8 @@ function getCss(
         background-image: ${getImage(images[0], widths[0], heights[0])};
         height: 100vh;
         display: flex;
+        max-width: 50vw;
+        margin: 0 auto;
         text-align: left;
         align-items: center;
         justify-content: flex-start;
@@ -69,6 +71,7 @@ function getCss(
         background-size: 100px 100px;
         height: 100vh;
         display: flex;
+        max-width: 50vw;
         text-align: center;
         align-items: center;
         justify-content: center;
@@ -86,9 +89,9 @@ function getCss(
     }
 
     .logo-wrapper-left {
+      padding-top: 50px;
         display: flex;
         align-items: flex-start;
-        align-content: center;
         justify-content: flex-start;
     }
     .logo-wrapper {
@@ -99,7 +102,7 @@ function getCss(
     }
 
     .logo {
-        margin: 0 75px 75px 0;
+        margin: 0 15px 75px 0;
     }
 
     .plus {
@@ -109,7 +112,7 @@ function getCss(
     }
 
     .spacer {
-        margin: 150px;
+        margin: 80px;
     }
 
     .emoji {
@@ -122,16 +125,27 @@ function getCss(
     .heading-main {
         font-family: 'Inter', sans-serif;
         font-size: 64px;
-        margin-bottom: -48px;
+        margin-bottom: -36px;
         font-weight: 300;
         color: #888888;
         line-height: 1;
     }
+    .heading-symbol {
+      font-family: 'Inter', sans-serif;
+        font-size: 200px;
+        font-style: normal;
+        color: #333;
+        // line-height: 1;
+        margin-top: 14px;
+        margin-bottom: -64px;
+        margin-left: -10px;
+    }
     .heading-subtitle {
         font-family: 'Inter', sans-serif;
-        font-size: ${sanitizeHtml(fontSize)};
+        // font-size: ${sanitizeHtml(fontSize)};
+        font-size: 72px;
         font-style: normal;
-        color: ${foreground};
+        color: #555;
         line-height: 1;
     }`;
 }
@@ -139,6 +153,7 @@ function getCss(
 export function getHtml(parsedReq: ParsedRequest) {
   const {
     text,
+    symbol,
     theme,
     md,
     fontSize,
@@ -168,17 +183,21 @@ export function getHtml(parsedReq: ParsedRequest) {
                   )
                   .join("")}
             </div>
-            ${
-              !hideHeader ? '<div class="heading-main">All-Time High</div>' : ""
-            }
+            <div class="heading-symbol">${sanitizeHtml(symbol)}
+            </div>
             <div class="heading-subtitle">${emojify(
               md ? marked(text) : sanitizeHtml(text)
             )}
             </div>
+            ${
+              hideHeader || true
+                ? ""
+                : '<div class="heading-main">All-Time High</div>'
+            }
             <div style="display:flex;align-items:center;justify-content:flex-start;">
               ${
                 cornerLogo
-                  ? '<img src="https://ath.ooo/logo/wordmark_transparent_tight_new.png" style="height:50px;margin-top:50px;width:auto;" />'
+                  ? '<img src="https://ath.ooo/images/ath-tp.png" style="height:200px;margin-top:50px;width:auto;" />'
                   : ""
               }
             </div>
@@ -192,8 +211,8 @@ function getImage(src: string, width = "auto", height = "350") {
         class="logo"
         alt="Generated Image"
         src="${sanitizeHtml(src)}"
-        width="${sanitizeHtml(width)}"
-        height="${sanitizeHtml(height)}"
+        width="350"
+        height="350"
     />`;
 }
 

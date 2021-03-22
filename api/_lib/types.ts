@@ -12,6 +12,7 @@ export interface ParsedRequest {
   widths: string[];
   heights: string[];
   cornerLogo: boolean;
+  symbol: string;
   hideHeader: boolean;
   centered: boolean;
 }
