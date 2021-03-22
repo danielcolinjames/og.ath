@@ -60,11 +60,11 @@ function getCss(
         background-image: ${getImage(images[0], widths[0], heights[0])};
         height: 100vh;
         display: flex;
-        max-width: 50vw;
+        max-width: 0vw;
         margin: 0 auto;
         text-align: left;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
     }
     .body-class {
         background: ${background};
@@ -90,9 +90,10 @@ function getCss(
 
     .logo-wrapper-left {
       padding-top: 50px;
+      width: 100%;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: center;
+        justify-content: center;
     }
     .logo-wrapper {
         display: flex;
@@ -102,7 +103,7 @@ function getCss(
     }
 
     .logo {
-        margin: 0 15px 75px 0;
+        margin: 0 15px 0;
     }
 
     .plus {
@@ -112,7 +113,7 @@ function getCss(
     }
 
     .spacer {
-        margin: 80px;
+        // margin: 80px;
     }
 
     .emoji {
@@ -127,6 +128,7 @@ function getCss(
         font-size: 64px;
         margin-bottom: -36px;
         font-weight: 300;
+        text-align: center;
         color: #888888;
         line-height: 1;
     }
@@ -136,7 +138,8 @@ function getCss(
         font-style: normal;
         color: #333;
         // line-height: 1;
-        margin-top: -14px;
+        text-align: center;
+        margin-top: 44px;
         margin-bottom: -64px;
         margin-left: -10px;
     }
@@ -194,7 +197,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                 ? ""
                 : '<div class="heading-main">All-Time High</div>'
             }
-            <div style="display:flex;align-items:center;justify-content:flex-start;">
+            <div style="display:flex;align-items:center;justify-content:center;">
               ${
                 cornerLogo
                   ? '<img src="https://ath.ooo/images/ath-tp.png" style="height:200px;margin-top:50px;width:auto;" />'
