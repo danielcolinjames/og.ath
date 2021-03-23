@@ -94,7 +94,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .asset-symbol {
       font-family: Satoshi-Black;
-      font-size: 180px;
+      font-size: 160px;
       line-height: 180px;
       margin: 0;
       margin-top: 32px;
@@ -105,13 +105,14 @@ function getCss(r: string, g: string, b: string) {
       font-size: 150px;
       margin: 0;
       padding: 0;
+      max-width: 1024px;
       padding-bottom: 24px;
     }
     .asset-name {
       font-family: Satoshi-Bold;
       color: #666666;
-      font-size: 96px;
-      line-height: 120px;
+      font-size: 72px;
+      line-height: 72px;
       margin: 0;
       padding: 0;
     }
@@ -139,8 +140,8 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="300"
-            height="300"
+            width="250"
+            height="250"
           />
           <div class="bottom-container-content">
             <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
