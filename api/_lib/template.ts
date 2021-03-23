@@ -44,7 +44,7 @@ function getCss(r: string, g: string, b: string) {
     .main-container {
       background-color: white;
       width: 2048px;
-      height: 1170px;
+      height: 1075px;
     }
     .top-container {
       width: 100%;
