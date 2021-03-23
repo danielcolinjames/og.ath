@@ -49,7 +49,8 @@ function getCss(r: string, g: string, b: string) {
     .top-container {
       width: 100%;
       height: calc(70% - 10px);
-      background-color: rgba(${r}, ${g}, ${b}, 0.085);
+      // background-color: rgba(${r}, ${g}, ${b},0.0425);
+      background-color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -73,7 +74,7 @@ function getCss(r: string, g: string, b: string) {
     .bottom-container {
       width: 100%;
       height: calc(30% - 10px);
-      background-color: rgba(${r}, ${g}, ${b}, 0.185);
+      background-color: rgba(${r}, ${g}, ${b},0.085);
       display: flex;
       flex-direction: column;
       align-items: center;
