@@ -136,21 +136,21 @@ export function getHtml(parsedReq: ParsedRequest) {
       <div class="top-container">
         <div class="asset-logo-container">
           <img
-          class="asset-logo"
-          alt="${sanitizeHtml(assetName)} logo"
-          src="${image}"
-          width="300"
-          height="300"
+            class="asset-logo"
+            alt="${sanitizeHtml(assetName)} logo"
+            src="${image}"
+            width="300"
+            height="300"
           />
           <div class="bottom-container-content">
             <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
             <div class="asset-name">${sanitizeHtml(assetName)}</div>
           </div>
-          </div>
-          </div>
-          <div class="coloured-line"></div>
-          <div class="bottom-container">
-          <div class="asset-ath">$${sanitizeHtml(ath)}</div>
+        </div>
+      </div>
+      <div class="coloured-line"></div>
+      <div class="bottom-container">
+        <div class="asset-ath">$${sanitizeHtml(ath)}</div>
       </div>
     </body>
   </html>`;
