@@ -1,32 +1,32 @@
 import { IncomingMessage } from "http";
 import { parse } from "url";
-import { ParsedRequest, Theme } from "./types";
+import { ParsedRequest } from "./types";
 
 export function parseRequest(req: IncomingMessage) {
   console.log("HTTP " + req.url);
   const { pathname, query } = parse(req.url || "/", true);
-  const {
-    fontSize,
-    images,
-    widths,
-    heights,
-    theme,
-    md,
-    cornerLogo,
-    symbol,
-    hideHeader,
-    centered,
-    // textLineTwo,
-  } = query || {};
+  const { image, assetSymbol, assetName, r, g, b, ath } = query || {};
 
-  if (Array.isArray(fontSize)) {
-    throw new Error("Expected a single fontSize");
+  if (Array.isArray(r)) {
+    throw new Error("Expected a single r value");
   }
-  if (Array.isArray(theme)) {
-    throw new Error("Expected a single theme");
+  if (Array.isArray(g)) {
+    throw new Error("Expected a single g value");
   }
-  if (Array.isArray(symbol)) {
-    throw new Error("Expected a single symbol");
+  if (Array.isArray(b)) {
+    throw new Error("Expected a single b value");
+  }
+  if (Array.isArray(assetSymbol)) {
+    throw new Error("Expected a single asset symbol");
+  }
+  if (Array.isArray(assetName)) {
+    throw new Error("Expected a single asset name");
+  }
+  if (Array.isArray(image)) {
+    throw new Error("Expected a single image source");
+  }
+  if (Array.isArray(ath)) {
+    throw new Error("Expected a single ath value");
   }
 
   const arr = (pathname || "/").slice(1).split(".");
@@ -44,47 +44,13 @@ export function parseRequest(req: IncomingMessage) {
   const parsedRequest: ParsedRequest = {
     fileType: extension === "jpeg" ? extension : "png",
     text: decodeURIComponent(text),
-    // textLineTwo: decodeURIComponent(textLineTwo),
-    theme: theme === "dark" ? "dark" : "light",
-    md: md === "1" || md === "true",
-    fontSize: fontSize || "96px",
-    symbol: symbol || "",
-    images: getArray(images),
-    widths: getArray(widths),
-    heights: getArray(heights),
-    centered: centered === "1" || centered === "true",
-    cornerLogo: cornerLogo === "1" || cornerLogo === "true",
-    hideHeader: hideHeader === "1" || hideHeader === "true",
+    assetSymbol: assetSymbol || "",
+    assetName: assetName || "",
+    image: image || "",
+    r: r || "255",
+    g: g || "255",
+    b: b || "255",
+    ath: ath || "",
   };
-  parsedRequest.images = getDefaultImages(
-    parsedRequest.images,
-    parsedRequest.theme
-  );
   return parsedRequest;
-}
-
-function getArray(stringOrArray: string[] | string | undefined): string[] {
-  if (typeof stringOrArray === "undefined") {
-    return [];
-  } else if (Array.isArray(stringOrArray)) {
-    return stringOrArray;
-  } else {
-    return [stringOrArray];
-  }
-}
-
-function getDefaultImages(images: string[], theme: Theme): string[] {
-  const defaultImage =
-    theme === "light"
-      ? "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg"
-      : "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg";
-
-  if (!images || !images[0]) {
-    return [defaultImage];
-  }
-  console.log("test");
-  // if (!images[0].startsWith('https://assets.vercel.com/') && !images[0].startsWith('https://assets.zeit.co/')) {
-  //     images[0] = defaultImage;
-  // }
-  return images;
 }

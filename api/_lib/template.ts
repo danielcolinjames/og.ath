@@ -1,224 +1,157 @@
 import { readFileSync } from "fs";
-import marked from "marked";
 import { sanitizeHtml } from "./sanitizer";
 import { ParsedRequest } from "./types";
-const twemoji = require("twemoji");
-const twOptions = { folder: "svg", ext: ".svg" };
-const emojify = (text: string) => twemoji.parse(text, twOptions);
 
 const rglr = readFileSync(
-  `${__dirname}/../_fonts/Inter-Regular.woff2`
+  `${__dirname}/../_fonts/Satoshi-Regular.woff2`
 ).toString("base64");
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString(
+
+const bold = readFileSync(`${__dirname}/../_fonts/Satoshi-Bold.woff2`).toString(
   "base64"
 );
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
-  "base64"
-);
+const black = readFileSync(
+  `${__dirname}/../_fonts/Satoshi-Black.woff2`
+).toString("base64");
 
-function getCss(
-  theme: string,
-  fontSize: string,
-  images: string[],
-  widths: string[],
-  heights: string[]
-) {
-  let background = "#eee";
-  let foreground = "#111";
-  // let radial = "lightgray";
-
-  if (theme === "dark") {
-    background = "#fefefe";
-    foreground = "#111";
-    // radial = "dimgray";
-  }
+function getCss(r: string, g: string, b: string) {
   return `
     @font-face {
-        font-family: 'Inter';
+        font-family: 'Satoshi-Regular';
         font-style:  normal;
         font-weight: normal;
         src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
     }
 
     @font-face {
-        font-family: 'Inter';
+        font-family: 'Satoshi-Bold';
         font-style:  normal;
         font-weight: black;
         src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
     }
 
     @font-face {
-        font-family: 'Vera';
-        font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
-
-    .body-left {
-        background: ${background};
-        background-size: 100px 100px;
-        background-image: ${getImage(images[0], widths[0], heights[0])};
-        height: 100vh;
-        display: flex;
-        max-width: 0vw;
-        margin: 0 auto;
-        text-align: left;
-        align-items: center;
-        justify-content: center;
-    }
-    .body-class {
-        background: ${background};
-        background-size: 100px 100px;
-        height: 100vh;
-        display: flex;
-        max-width: 50vw;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
+        font-family: 'Satoshi-Black';
+        font-style:  normal;
+        font-weight: black;
+        src: url(data:font/woff2;charset=utf-8;base64,${black}) format('woff2');
     }
 
-    code {
-        color: #D400FF;
-        font-family: 'Vera';
-        white-space: pre-wrap;
-        letter-spacing: -5px;
+    body {
+      padding: 0;
+      margin: 0;
     }
 
-    code:before, code:after {
-        content: '\`';
+    .main-container {
+      background-color: white;
+      width: 2048px;
+      height: 1170px;
     }
-
-    .logo-wrapper-left {
-      padding-top: 50px;
+    .top-container {
       width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      height: calc(70% - 10px);
+      background-color: rgba(${r}, ${g}, ${b}, 0.085);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    .logo-wrapper {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
+    .ath-logo-container {
+      position: absolute;
+      right: 100px;
+      top: 70px;
     }
-
-    .logo {
-        margin: 0 15px 0;
+    .ath-logo {
+      height: 150px;
+      width: 150px;
     }
-
-    .plus {
-        color: #BBB;
-        font-family: Times New Roman, Verdana;
-        font-size: 100px;
+    .asset-logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-
-    .spacer {
-        // margin: 80px;
+    .bottom-container {
+      width: 100%;
+      height: calc(30% - 10px);
+      background-color: rgba(${r}, ${g}, ${b}, 0.185);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-
-    .emoji {
-        height: 1em;
-        width: 1em;
-        margin: 0 .05em 0 .1em;
-        vertical-align: -0.1em;
+    .bottom-container-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 1024px;
+      text-align: center;
     }
-    
-    .heading-main {
-        font-family: 'Inter', sans-serif;
-        font-size: 64px;
-        margin-bottom: -36px;
-        font-weight: 300;
-        text-align: center;
-        color: #888888;
-        line-height: 1;
+    .coloured-line {
+      width: 100%;
+      height: 20px;
+      background-color: rgba(${r}, ${g}, ${b}, 1);
     }
-    .heading-symbol {
-      font-family: 'Inter', sans-serif;
-        font-size: 200px;
-        font-style: normal;
-        color: #333;
-        // line-height: 1;
-        text-align: center;
-        margin-top: 44px;
-        margin-bottom: -64px;
-        margin-left: -10px;
+    .asset-symbol {
+      font-family: Satoshi-Black;
+      font-size: 180px;
+      line-height: 180px;
+      margin: 0;
+      margin-top: 32px;
+      padding: 0;
     }
-    .heading-subtitle {
-        font-family: 'Inter', sans-serif;
-        // font-size: ${sanitizeHtml(fontSize)};
-        font-size: 72px;
-        font-style: normal;
-        color: ${foreground ? "#555" : "#555"};
-        line-height: 1;
-    }`;
+    .asset-ath {
+      font-family: Satoshi-Black;
+      font-size: 150px;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 24px;
+    }
+    .asset-name {
+      font-family: Satoshi-Bold;
+      color: #666666;
+      font-size: 96px;
+      line-height: 120px;
+      margin: 0;
+      padding: 0;
+    }
+}`;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const {
-    text,
-    symbol,
-    theme,
-    md,
-    fontSize,
-    images,
-    widths,
-    heights,
-    cornerLogo,
-    hideHeader,
-    centered,
-  } = parsedReq;
-  return `<!DOCTYPE html>
-<html>
+  const { ath, assetSymbol, assetName, r, g, b, image } = parsedReq;
+  return `
+  <!DOCTYPE html>
+  <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        ${getCss(theme, fontSize, images, widths, heights)}
+        ${getCss(r, g, b)}
     </style>
-    <body class="${centered ? "body-class" : "body-left"}">
-        <div>
-          <div class="spacer">
-            <div class="${centered ? "logo-wrapper" : "logo-wrapper-left"}">
-                ${images
-                  .map(
-                    (img, i) =>
-                      getPlusSign(i) + getImage(img, widths[i], heights[i])
-                  )
-                  .join("")}
-            </div>
-            <div class="heading-symbol">${sanitizeHtml(symbol)}
-            </div>
-            <div class="heading-subtitle">${emojify(
-              md ? marked(text) : sanitizeHtml(text)
-            )}
-            </div>
-            ${
-              hideHeader || true
-                ? ""
-                : '<div class="heading-main">All-Time High</div>'
-            }
-            <div style="display:flex;align-items:center;justify-content:center;">
-              ${
-                cornerLogo
-                  ? '<img src="https://ath.ooo/images/ath-tp.png" style="height:200px;margin-top:50px;width:auto;" />'
-                  : ""
-              }
-            </div>
-        </div>
+    <body class="main-container">
+      <div class="ath-logo-container">
+        <img src="https://ath.ooo/images/ath-tp.png" class="ath-logo" />
+      </div>
+      <div class="top-container">
+        <div class="asset-logo-container">
+          <img
+          class="asset-logo"
+          alt="${sanitizeHtml(assetName)} logo"
+          src="${image}"
+          width="300"
+          height="300"
+          />
+          <div class="bottom-container-content">
+            <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
+            <div class="asset-name">${sanitizeHtml(assetName)}</div>
+          </div>
+          </div>
+          </div>
+          <div class="coloured-line"></div>
+          <div class="bottom-container">
+          <div class="asset-ath">$${sanitizeHtml(ath)}</div>
+      </div>
     </body>
-</html>`;
-}
-
-function getImage(src: string, width = "auto", height = "350") {
-  return `<img
-        class="logo"
-        alt="Generated Image"
-        src="${sanitizeHtml(src)}"
-        width=${width ? "300" : "300"}
-        height=${height ? "300" : "300"}
-    />`;
-}
-
-function getPlusSign(i: number) {
-  return i === 0 ? "" : '<div class="plus">+</div>';
+  </html>`;
 }
