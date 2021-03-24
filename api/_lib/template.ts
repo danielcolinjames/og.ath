@@ -152,7 +152,11 @@ export function getHtml(parsedReq: ParsedRequest) {
       </div>
       <div class="coloured-line"></div>
       <div class="bottom-container">
-        <div class="asset-ath">$${sanitizeHtml(ath)}</div>
+        <div class="asset-ath">${
+          sanitizeHtml(ath) === "undefined"
+            ? `No price data`
+            : `$${sanitizeHtml(ath)}`
+        }</div>
       </div>
     </body>
   </html>`;
