@@ -48,7 +48,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .top-container {
       width: 100%;
-      height: calc(70% - 10px);
+      height: calc(50% - 10px);
       // background-color: rgba(${r}, ${g}, ${b},0.0425);
       background-color: white;
       display: flex;
@@ -73,7 +73,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .bottom-container {
       width: 100%;
-      height: calc(30% - 10px);
+      height: calc(50% - 10px);
       background-color: rgba(${r}, ${g}, ${b},0.085);
       display: flex;
       flex-direction: column;
@@ -95,10 +95,10 @@ function getCss(r: string, g: string, b: string) {
     }
     .asset-symbol {
       font-family: Satoshi-Black;
-      font-size: 160px;
-      line-height: 180px;
+      font-size: 200px;
+      line-height: 220px;
       margin: 0;
-      margin-top: 32px;
+      margin-top: -20px;
       padding: 0;
     }
     .asset-ath {
@@ -113,7 +113,7 @@ function getCss(r: string, g: string, b: string) {
       font-family: Satoshi-Bold;
       color: #666666;
       font-size: 72px;
-      line-height: 72px;
+      line-height: 96px;
       margin: 0;
       padding: 0;
     }
@@ -121,7 +121,7 @@ function getCss(r: string, g: string, b: string) {
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { ath, assetSymbol, assetName, r, g, b, image } = parsedReq;
+  const { assetSymbol, assetName, r, g, b, image } = parsedReq;
   return `
   <!DOCTYPE html>
   <html>
@@ -172,22 +172,17 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="250"
-            height="250"
+            width="300"
+            height="300"
           />
-          <div class="bottom-container-content">
-            <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
-            <div class="asset-name">${sanitizeHtml(assetName)}</div>
-          </div>
         </div>
       </div>
       <div class="coloured-line"></div>
       <div class="bottom-container">
-        <div class="asset-ath">${
-          sanitizeHtml(ath) === "undefined"
-            ? `No price data`
-            : `$${sanitizeHtml(ath)}`
-        }</div>
+        <div class="bottom-container-content">
+          <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
+          <div class="asset-name">${sanitizeHtml(assetName)}</div>
+        </div>
       </div>
     </body>
   </html>`;
