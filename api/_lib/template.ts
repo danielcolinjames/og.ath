@@ -48,7 +48,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .top-container {
       width: 100%;
-      height: calc(50% - 10px);
+      height: calc(60% - 10px);
       // background-color: rgba(${r}, ${g}, ${b},0.0425);
       background-color: white;
       display: flex;
@@ -62,8 +62,8 @@ function getCss(r: string, g: string, b: string) {
       top: 70px;
     }
     .ath-logo {
-      height: 200px;
-      width: 200px;
+      height: 250px;
+      width: 250px;
     }
     .asset-logo-container {
       display: flex;
@@ -73,7 +73,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .bottom-container {
       width: 100%;
-      height: calc(50% - 10px);
+      height: calc(40% - 10px);
       background-color: rgba(${r}, ${g}, ${b},0.085);
       display: flex;
       flex-direction: column;
@@ -95,10 +95,10 @@ function getCss(r: string, g: string, b: string) {
     }
     .asset-symbol {
       font-family: Satoshi-Black;
-      font-size: 200px;
-      line-height: 220px;
+      font-size: 180px;
+      line-height: 200px;
       margin: 0;
-      margin-top: -20px;
+      margin-top: -36px;
       padding: 0;
     }
     .asset-ath {
@@ -172,8 +172,8 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="300"
-            height="300"
+            width="400"
+            height="400"
           />
         </div>
       </div>
