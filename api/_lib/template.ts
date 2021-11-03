@@ -43,12 +43,12 @@ function getCss(r: string, g: string, b: string) {
 
     .main-container {
       background-color: white;
-      width: 2048px;
-      height: 1075px;
+      width: 512px;
+      height: 267px;
     }
     .top-container {
       width: 100%;
-      height: calc(60% - 10px);
+      height: calc(60% - 2.5px);
       // background-color: rgba(${r}, ${g}, ${b},0.0425);
       background-color: white;
       display: flex;
@@ -58,12 +58,12 @@ function getCss(r: string, g: string, b: string) {
     }
     .ath-logo-container {
       position: absolute;
-      right: 100px;
-      top: 70px;
+      right: 25px;
+      top: 17.5px;
     }
     .ath-logo {
-      height: 250px;
-      width: 250px;
+      height: 62.5px;
+      width: 62.5px;
     }
     .asset-logo-container {
       display: flex;
@@ -73,7 +73,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .bottom-container {
       width: 100%;
-      height: calc(40% - 10px);
+      height: calc(40% - 2.5px);
       background-color: rgba(${r}, ${g}, ${b},0.085);
       display: flex;
       flex-direction: column;
@@ -85,35 +85,35 @@ function getCss(r: string, g: string, b: string) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      max-width: 1024px;
+      max-width: 256px;
       text-align: center;
     }
     .coloured-line {
       width: 100%;
-      height: 20px;
+      height: 5px;
       background-color: rgba(${r}, ${g}, ${b}, 1);
     }
     .asset-symbol {
       font-family: Satoshi-Black;
-      font-size: 180px;
-      line-height: 200px;
+      font-size: 45px;
+      line-height: 50px;
       margin: 0;
-      margin-top: -36px;
+      margin-top: -9px;
       padding: 0;
     }
     .asset-ath {
       font-family: Satoshi-Black;
-      font-size: 150px;
+      font-size: 37.5px;
       margin: 0;
       padding: 0;
-      max-width: 1024px;
-      padding-bottom: 24px;
+      max-width: 256px;
+      padding-bottom: 6px;
     }
     .asset-name {
       font-family: Satoshi-Bold;
       color: #666666;
-      font-size: 72px;
-      line-height: 96px;
+      font-size: 18px;
+      line-height: 24px;
       margin: 0;
       padding: 0;
     }
@@ -172,8 +172,8 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="400"
-            height="400"
+            width="100"
+            height="100"
           />
         </div>
       </div>
