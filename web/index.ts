@@ -1,4 +1,4 @@
-import { ParsedRequest, FileType } from "../api/_lib/types";
+import { ParsedRequest } from "../api/_lib/types";
 const { H, R, copee } = window as any;
 let timeout = -1;
 
@@ -30,18 +30,37 @@ const ImagePreview = ({
 };
 
 interface DropdownOption {
-  text: string;
-  value: string;
+  ticker: string;
+  name: string;
+  image: string;
+  r: number;
+  g: number;
+  b: number;
 }
 
 interface DropdownProps {
   options: DropdownOption[];
-  value: string;
+  ticker: string;
+  name: string;
+  image: string;
+  r: number;
+  g: number;
+  b: number;
   onchange: (val: string) => void;
   small: boolean;
 }
 
-const Dropdown = ({ options, value, onchange, small }: DropdownProps) => {
+const Dropdown = ({
+  options,
+  ticker,
+  name,
+  image,
+  r,
+  g,
+  b,
+  onchange,
+  small,
+}: DropdownProps) => {
   const wrapper = small ? "select-wrapper small" : "select-wrapper";
   const arrow = small ? "select-arrow small" : "select-arrow";
   return H(
@@ -51,7 +70,19 @@ const Dropdown = ({ options, value, onchange, small }: DropdownProps) => {
       "select",
       { onchange: (e: any) => onchange(e.target.value) },
       options.map((o) =>
-        H("option", { value: o.value, selected: value === o.value }, o.text)
+        H(
+          "option",
+          {
+            value: o.ticker,
+            selected: ticker === o.ticker,
+            name,
+            image,
+            r,
+            g,
+            b,
+          },
+          o.ticker
+        )
       )
     ),
     H("div", { className: arrow }, "▼")
@@ -96,20 +127,36 @@ const Toast = ({ show, message }: ToastProps) => {
   );
 };
 
-const fileTypeOptions: DropdownOption[] = [
-  { text: "PNG", value: "png" },
-  { text: "JPEG", value: "jpeg" },
+const assetTestExamples: DropdownOption[] = [
+  {
+    ticker: "BAT",
+    name: "Basic Attention Token",
+    r: 252,
+    g: 84,
+    b: 4,
+    image:
+      "https://assets.coingecko.com/coins/images/677/large/basic-attention-token.png?1547034427",
+  },
+  {
+    ticker: "HNT",
+    name: "Helium",
+    r: 68,
+    g: 76,
+    b: 252,
+    image:
+      "https://assets.coingecko.com/coins/images/4284/large/Helium_HNT.png?1612620071",
+  },
+  {
+    ticker: "BTC",
+    name: "Bitcoin",
+    r: 244,
+    g: 148,
+    b: 28,
+    image:
+      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+  },
 ];
 
-const fontSizeOptions: DropdownOption[] = Array.from({ length: 10 })
-  .map((_, i) => i * 25)
-  .filter((n) => n > 0)
-  .map((n) => ({ text: n + "px", value: n + "px" }));
-
-const markdownOptions: DropdownOption[] = [
-  { text: "Plain Text", value: "0" },
-  { text: "Markdown", value: "1" },
-];
 interface AppState extends ParsedRequest {
   loading: boolean;
   showToast: boolean;
@@ -136,7 +183,6 @@ const App = (_: any, state: AppState, setState: SetState) => {
   };
   const {
     fileType = "png",
-    text = "**Hello** World",
     assetName = "Basic Attention Token",
     assetSymbol = "BAT",
     r = "252",
@@ -149,7 +195,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     overrideUrl = null,
   } = state;
   const url = new URL(window.location.origin);
-  url.pathname = `${encodeURIComponent(text)}.${fileType}`;
+  url.pathname = `${assetSymbol}.${fileType}`;
   url.searchParams.append("assetName", assetName);
   url.searchParams.append("assetSymbol", assetSymbol);
   url.searchParams.append("r", r);
@@ -166,27 +212,18 @@ const App = (_: any, state: AppState, setState: SetState) => {
       H(
         "div",
         H(Field, {
-          label: "File Type",
+          label: "Ticker Symbol",
           input: H(Dropdown, {
-            options: fileTypeOptions,
-            value: fileType,
-            onchange: (val: FileType) => setLoadingState({ fileType: val }),
-          }),
-        }),
-        H(Field, {
-          label: "Asset Name",
-          input: H(Dropdown, {
-            options: fontSizeOptions,
-            value: assetName,
-            onchange: (val: string) => setLoadingState({ assetName: val }),
-          }),
-        }),
-        H(Field, {
-          label: "Text Type",
-          input: H(Dropdown, {
-            options: markdownOptions,
-            value: assetSymbol,
-            onchange: (val: string) => setLoadingState({ assetSymbol: val }),
+            options: assetTestExamples,
+            ticker: assetSymbol,
+            name: assetName,
+            image: image,
+            onchange: (ticker: string) =>
+              setLoadingState({
+                assetSymbol: ticker,
+                assetName: assetName,
+                image: image,
+              }),
           }),
         })
       )
