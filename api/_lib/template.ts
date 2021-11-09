@@ -50,13 +50,35 @@ function getCss(r: string, g: string, b: string) {
       align-items: center;
     }
     .left-container {
-      width: 256px;
+      position: relative;
+      width: 66.6%;
       height: 267px;
       background-color: rgba(${r}, ${g}, ${b}, 1);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+    .top-left-url-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 24px;
+      left: 32px;
+    }
+    .top-left-url-base {
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      font-family: Satoshi-Medium;
+      text-align: left;
+      line-height: 24px;
+      margin: 0 0 0 0;
+    }
+    .top-left-url-symbol {
+      color: rgba(255, 255, 255, 0.75);
+      margin-left: 2px;
     }
     .left-container-content {
       display: flex;
@@ -68,14 +90,16 @@ function getCss(r: string, g: string, b: string) {
     }
     .ath-logo-container {
       position: absolute;
-      right: 20px;
+      right: 28px;
       top: 8px;
     }
     .ath-logo {
-      height: 45px;
-      width: 45px;
+      height: 64px;
+      width: 64px;
     }
     .asset-logo-container {
+      position: absolute;
+      bottom: 25px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -92,16 +116,19 @@ function getCss(r: string, g: string, b: string) {
       justify-content: center;
     }
     .asset-name-container {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
     .asset-name-container-content {
       display: flex;
-      padding: 0 17px;
+      padding: 0 17px 0 0;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
     .asset-symbol {
       font-family: Satoshi-Black;
@@ -111,15 +138,17 @@ function getCss(r: string, g: string, b: string) {
       whitespace: nowrap;
       margin: 0;
       padding: 0;
+      text-shadow: 0 0 50px rgba(0, 0, 0, 0.45);
     }
     .asset-name {
       font-family: Satoshi-Regular;
       color: #ffffff;
-      text-align: center;
+      text-align: left;
       font-size: 24px;
       line-height: 24px;
       margin: 5px 0 0 0;
       padding: 0;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
     }
 }`;
 }
@@ -137,6 +166,12 @@ export function getHtml(parsedReq: ParsedRequest) {
     </style>
     <body class="main-container">
       <div class="left-container">
+        <div class="top-left-url-container">
+          <p class="top-left-url-base">
+            ath.ooo<span class="top-left-url-symbol">/
+            </span>
+          </p>
+        </div>
         <div class="asset-name-container">
           <div class="asset-name-container-content">
             <div class="asset-symbol">${sanitizeHtml(assetSymbol)}</div>
@@ -184,8 +219,8 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="140"
-            height="140"
+            width="160"
+            height="160"
           />
         </div>
       </div>
