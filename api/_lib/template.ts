@@ -68,8 +68,8 @@ function getCss(r: string, g: string, b: string) {
     }
     .ath-logo-container {
       position: absolute;
-      right: 15px;
-      top: 5px;
+      right: 20px;
+      top: 8px;
     }
     .ath-logo {
       height: 45px;
@@ -98,7 +98,7 @@ function getCss(r: string, g: string, b: string) {
     }
     .asset-name-container-content {
       display: flex;
-      padding: 0px 7.5px;
+      padding: 0 17px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -113,11 +113,11 @@ function getCss(r: string, g: string, b: string) {
       padding: 0;
     }
     .asset-name {
-      font-family: Satoshi-Medium;
+      font-family: Satoshi-Regular;
       color: #ffffff;
       text-align: center;
-      font-size: 22px;
-      line-height: 22px;
+      font-size: 24px;
+      line-height: 24px;
       margin: 5px 0 0 0;
       padding: 0;
     }
@@ -184,8 +184,8 @@ export function getHtml(parsedReq: ParsedRequest) {
             class="asset-logo"
             alt="${sanitizeHtml(assetName)} logo"
             src="${image}"
-            width="150"
-            height="150"
+            width="140"
+            height="140"
           />
         </div>
       </div>
